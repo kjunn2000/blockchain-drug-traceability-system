@@ -1,8 +1,7 @@
 package com.moody.gui;
 
 import com.moody.blockchain.*;
-import com.moody.service.BlockchainService;
-import com.moody.service.BlockchainServiceImpl;
+import com.moody.service.*;
 
 import java.math.BigInteger;
 import javax.swing.*;
@@ -15,7 +14,9 @@ public class SupplierForm extends JFrame{
     private JTextField drugNameField;
     private JTextField descriptionField;
     private JButton addDrugBtn;
+    private JButton logOutButton;
     private BlockchainService blockchainService;
+    private AuthenticationService authenticationService;
 
     public SupplierForm(String title) {
         super(title);
@@ -23,16 +24,28 @@ public class SupplierForm extends JFrame{
         this.setContentPane(mainPanel);
         this.pack();
         this.blockchainService = new BlockchainServiceImpl();
+        this.authenticationService = new AuthenticationServiceImpl();
         addDrugBtn.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent actionEvent) {
                 Drug drug = new Drug(drugNameField.getText(), new BigInteger(quantityField.getText()), descriptionField.getText(), DrugStatus.UNPROCESSED);
                 blockchainService.addNewDrug(drug);
-                quantityField.setText("");
-                drugNameField.setText("");
-                descriptionField.setText("");
+                clearForm();
             }
         });
+        logOutButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent actionEvent) {
+                clearForm();
+                authenticationService.logOut(FormManager.supplierForm);
+            }
+        });
+    }
+
+    public void clearForm(){
+        quantityField.setText("");
+        drugNameField.setText("");
+        descriptionField.setText("");
     }
 
 }

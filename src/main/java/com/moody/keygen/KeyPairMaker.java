@@ -74,8 +74,8 @@ public class KeyPairMaker {
                     Base64.getEncoder().encodeToString( prikey.getEncoded() ) );
 
             //keystore
-            put( pubkey.getEncoded(), "keyfiles/"+filename+"_pubkey");
-            put( prikey.getEncoded(), "keyfiles/"+filename+"_prikey");
+            put( pubkey.getEncoded(), Configuration.PUBLICKEY_FILE+filename+"_pubkey");
+            put( prikey.getEncoded(), Configuration.PRIVATEKEY_FILE+filename+"_prikey");
 
         } catch (Exception e) {
             e.printStackTrace();

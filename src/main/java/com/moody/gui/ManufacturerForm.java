@@ -1,10 +1,10 @@
 package com.moody.gui;
 
+import com.moody.authentication.UserBank;
 import com.moody.blockchain.BusinessType;
 import com.moody.blockchain.TransactionRecord;
 import com.moody.blockchain.TransactionType;
-import com.moody.service.BlockchainService;
-import com.moody.service.BlockchainServiceImpl;
+import com.moody.service.*;
 
 import javax.swing.*;
 import java.awt.event.ActionEvent;
@@ -19,7 +19,9 @@ public class ManufacturerForm extends JFrame{
     private JLabel msgLabel;
     private JTextField sendDrugId;
     private JButton confirmSendDashboard;
+    private JButton logOutButton;
     private BlockchainService blockchainService;
+    private AuthenticationService authenticationService;
 
     public ManufacturerForm(String title) {
         super(title);
@@ -27,16 +29,13 @@ public class ManufacturerForm extends JFrame{
         this.setContentPane(mainPanel);
         this.pack();
         this.blockchainService = new BlockchainServiceImpl();
+        this.authenticationService = new AuthenticationServiceImpl();
         confirmReceiveBtn.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent actionEvent) {
-                TransactionRecord transactionRecord = new TransactionRecord(TransactionType.RECEIVED,
-                        "Chai Juo Ann",
-                        "Moody Co",
-                        "Bukit Jalil",
-                        BusinessType.MANUFACTURER);
-                if (blockchainService.addTransactionRecord(receiveDrugId.getText(), transactionRecord)){
+               if (blockchainService.addTransactionRecord(receiveDrugId.getText(), TransactionType.RECEIVED)){
                     msgLabel.setText("Success add a receive record.");
+                   clearForm();
                 }else {
                     msgLabel.setText("Drug id not found.");
                 }
@@ -45,18 +44,26 @@ public class ManufacturerForm extends JFrame{
         confirmSendDashboard.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent actionEvent) {
-                TransactionRecord transactionRecord = new TransactionRecord(TransactionType.SEND,
-                        "Chai Juo Ann",
-                        "Moody Co",
-                        "Bukit Jalil",
-                        BusinessType.MANUFACTURER);
-                if (blockchainService.addTransactionRecord(sendDrugId.getText(), transactionRecord)){
+                if (blockchainService.addTransactionRecord(sendDrugId.getText(), TransactionType.SEND)){
                     msgLabel.setText("Success add a send record.");
+                    clearForm();
                 }else {
                     msgLabel.setText("Drug id not found.");
                 }
             }
         });
+        logOutButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent actionEvent) {
+                clearForm();
+                authenticationService.logOut(FormManager.manufacturerForm);
+            }
+        });
+    }
+
+    public void clearForm(){
+        receiveDrugId.setText("");
+        sendDrugId.setText("");
     }
 
 }

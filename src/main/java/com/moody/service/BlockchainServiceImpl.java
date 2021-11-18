@@ -1,5 +1,6 @@
 package com.moody.service;
 
+import com.moody.authentication.UserBank;
 import com.moody.blockchain.*;
 
 import java.util.Objects;
@@ -7,7 +8,13 @@ import java.util.Objects;
 public class BlockchainServiceImpl implements BlockchainService{
 
     @Override
-    public boolean addTransactionRecord(String drugId, TransactionRecord record) {
+    public boolean addTransactionRecord(String drugId, TransactionType type) {
+        TransactionRecord record= new TransactionRecord(type,
+                UserBank.getCurrentUser().getFullName(),
+                UserBank.getCurrentUser().getCompanyName(),
+                UserBank.getCurrentUser().getCompanyLocation(),
+                UserBank.getCurrentUser().getBusinessType());
+
         Block target = null;
         int count = 0;
         for (Block block : Blockchain.DB){
@@ -40,9 +47,9 @@ public class BlockchainServiceImpl implements BlockchainService{
         newBlock.getHeader().setIndex(prevBlock.getHeader().getIndex()+1);
         Transaction newTranx = new Transaction();
         newTranx.add(new TransactionRecord(TransactionType.SEND,
-                "Tam Kai Jun",
-                "Moody Co",
-                "Bukit Jalil",
+                UserBank.getCurrentUser().getFullName(),
+                UserBank.getCurrentUser().getCompanyName(),
+                UserBank.getCurrentUser().getBusinessType().toString(),
                 BusinessType.SUPPLIER));
         newBlock.setTranx(newTranx);
         Blockchain.nextBlock( newBlock);

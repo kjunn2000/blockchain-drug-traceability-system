@@ -5,20 +5,20 @@ import java.util.List;
 
 public class MerkleTree {
 
-    private List<TransactionRecord> tranxLst;
+    private List<EncryptTransactionRecord> tranxLst;
     private String root = "0";
 
     public String getRoot() {
         return root;
     }
 
-    private MerkleTree(List<TransactionRecord> tranxLst) {
+    private MerkleTree(List<EncryptTransactionRecord> tranxLst) {
         super();
         this.tranxLst = tranxLst;
     }
 
     private static MerkleTree instance;
-    public static MerkleTree getInstance( List<TransactionRecord> tranxLst ) {
+    public static MerkleTree getInstance( List<EncryptTransactionRecord> tranxLst ) {
         if( instance == null ) {
             return new MerkleTree(tranxLst);
         }
@@ -29,8 +29,8 @@ public class MerkleTree {
 
         List<String> tempLst = new ArrayList<>();
 
-        for (TransactionRecord tranx : this.tranxLst) {
-            tempLst.add(tranx.getTransactionId().toString());
+        for (EncryptTransactionRecord tranx : this.tranxLst) {
+            tempLst.add(tranx.getEncryptData());
         }
 
         List<String> hashes = genTranxHashLst( tempLst );
