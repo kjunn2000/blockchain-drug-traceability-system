@@ -7,6 +7,7 @@ import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.nio.file.StandardOpenOption;
 import java.util.LinkedList;
+import java.util.concurrent.atomic.AtomicInteger;
 
 public class Blockchain implements Serializable {
 
@@ -69,4 +70,15 @@ public class Blockchain implements Serializable {
         }
     }
 
+    public static void mining(int index, String prevHash) {
+        for (Block block : DB) {
+            if(index > 0) {
+                index--;
+                continue;
+            }
+            block.getHeader().setPreviousHash(prevHash);
+            block.generateHashValue();
+            prevHash = block.getHeader().getCurrentHash();
+        }
+    }
 }

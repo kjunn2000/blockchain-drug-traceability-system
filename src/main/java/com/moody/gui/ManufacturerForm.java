@@ -26,14 +26,17 @@ public class ManufacturerForm extends JFrame{
             @Override
             public void actionPerformed(ActionEvent actionEvent) {
                 Block target = null;
+                Integer count = 0;
                 for (Block block : Blockchain.DB){
                     if(Objects.isNull(block.getDrug())){
+                        count++;
                         continue;
                     }
                     if (block.getDrug().getDrugId().toString().equals(receiveDrugId.getText())){
                         target = block;
                         break;
                     }
+                    count++;
                 }
                 if (Objects.isNull(target)){
                     receiveDashboardErrorMsg.setText("Invalid Drug ID");
@@ -46,6 +49,7 @@ public class ManufacturerForm extends JFrame{
                         "Bukit Jalil",
                         BusinessType.MANUFACTURER));
                 target.setTranx(newTranx);
+                Blockchain.mining(count+1, target.getHeader().getCurrentHash());
                 Blockchain.persist();
                 Blockchain.distribute();
             }
