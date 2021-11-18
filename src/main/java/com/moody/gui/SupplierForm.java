@@ -1,6 +1,8 @@
 package com.moody.gui;
 
 import com.moody.blockchain.*;
+import com.moody.service.BlockchainService;
+import com.moody.service.BlockchainServiceImpl;
 
 import java.math.BigInteger;
 import javax.swing.*;
@@ -13,29 +15,19 @@ public class SupplierForm extends JFrame{
     private JTextField drugNameField;
     private JTextField descriptionField;
     private JButton addDrugBtn;
+    private BlockchainService blockchainService;
 
     public SupplierForm(String title) {
         super(title);
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         this.setContentPane(mainPanel);
         this.pack();
+        this.blockchainService = new BlockchainServiceImpl();
         addDrugBtn.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent actionEvent) {
                 Drug drug = new Drug(drugNameField.getText(), new BigInteger(quantityField.getText()), descriptionField.getText(), DrugStatus.UNPROCESSED);
-                Block prevBlock = Blockchain.get().getLast();
-                Block newBlock = new Block( prevBlock.getHeader().getCurrentHash(), drug);
-                newBlock.getHeader().setIndex(prevBlock.getHeader().getIndex()+1);
-                Transaction newTranx = new Transaction();
-                newTranx.add(new TransactionRecord(TransactionType.SEND,
-                        "Tam Kai Jun",
-                        "Moody Co",
-                        "Bukit Jalil",
-                        BusinessType.SUPPLIER));
-                newBlock.setTranx(newTranx);
-                Blockchain.nextBlock( newBlock);
-                Blockchain.distribute();
-
+                blockchainService.addNewDrug(drug);
                 quantityField.setText("");
                 drugNameField.setText("");
                 descriptionField.setText("");

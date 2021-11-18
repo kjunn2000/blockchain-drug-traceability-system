@@ -10,10 +10,10 @@
   {
     "header": {
       "index": 1,
-      "currentHash": "829c8a78307b1916100545ffd292e26b7022f03183bfd9685a63fa1975c52efa",
+      "currentHash": "b86303b4eee6f6dbad4bd74be2c1df0166dbbbefeeb5ba9953bba58464cdffb5",
       "previousHash": "16ce7056100549a1825d6efc1b7120bc7ddca53c87efc025c5e72946ab334a00",
       "timeStamp": 1637205307914,
-      "merkleRoot": "0e8c260c36122ca3de349988e2d3ef3e75155f5804bb9c2746bc31ba950cbd02"
+      "merkleRoot": "ea84a7e6c948a70e342d9ebdee98711db1c44143ba752e94b9a8f3fbee1d8a5a"
     },
     "drug": {
       "drugId": "397074dd-f963-4307-aa66-3c342e1032e5",
@@ -129,6 +129,48 @@
               "nano": 291969000
             }
           }
+        },
+        {
+          "transactionId": "7d1f5023-755e-4c68-aff9-bcded733c167",
+          "type": "RECEIVED",
+          "personInCharge": "Chai Juo Ann",
+          "companyName": "Moody Co",
+          "companyLocation": "Bukit Jalil",
+          "businessType": "MANUFACTURER",
+          "dateTime": {
+            "date": {
+              "year": 2021,
+              "month": 11,
+              "day": 18
+            },
+            "time": {
+              "hour": 14,
+              "minute": 14,
+              "second": 13,
+              "nano": 845323000
+            }
+          }
+        },
+        {
+          "transactionId": "ada16b49-5238-4dc8-8121-d2dae7ec4c51",
+          "type": "RECEIVED",
+          "personInCharge": "Chai Juo Ann",
+          "companyName": "Moody Co",
+          "companyLocation": "Bukit Jalil",
+          "businessType": "MANUFACTURER",
+          "dateTime": {
+            "date": {
+              "year": 2021,
+              "month": 11,
+              "day": 18
+            },
+            "time": {
+              "hour": 14,
+              "minute": 18,
+              "second": 18,
+              "nano": 818840000
+            }
+          }
         }
       ]
     }
@@ -136,8 +178,8 @@
   {
     "header": {
       "index": 2,
-      "currentHash": "9a1af1a866f872ac19561f01896024a4c7aa6644f4a265bc819d7ed56bac4b5d",
-      "previousHash": "829c8a78307b1916100545ffd292e26b7022f03183bfd9685a63fa1975c52efa",
+      "currentHash": "63b84f16c8ea7868d7e081d348ea4c594546210ce789af65e9bd0ae1e31433a1",
+      "previousHash": "b86303b4eee6f6dbad4bd74be2c1df0166dbbbefeeb5ba9953bba58464cdffb5",
       "timeStamp": 1637205332776,
       "merkleRoot": "80fde74ce5f66525fc9ddbdf284dcf7bc58c10efe919ae22791febb6c84c6262"
     },
@@ -304,8 +346,8 @@
   {
     "header": {
       "index": 3,
-      "currentHash": "d6856da2245d3507c2707aa30476c25a253f97abd18b258b7d035e2aacefd643",
-      "previousHash": "9a1af1a866f872ac19561f01896024a4c7aa6644f4a265bc819d7ed56bac4b5d",
+      "currentHash": "821ae983f221108484b62a311f66fae53b00d65d7100dab2be7a3715320d0ed4",
+      "previousHash": "63b84f16c8ea7868d7e081d348ea4c594546210ce789af65e9bd0ae1e31433a1",
       "timeStamp": 1637212057475,
       "merkleRoot": "b9c2947a4cdaec4bcbe61e684cc4ba601663893884a639df40f66a7d563735e3"
     },
@@ -337,6 +379,48 @@
               "minute": 7,
               "second": 37,
               "nano": 485101000
+            }
+          }
+        }
+      ]
+    }
+  },
+  {
+    "header": {
+      "index": 4,
+      "currentHash": "be344fbe53a809768936f3efe86f55927c7f3351e6f4a6bc1c13b837f45844d1",
+      "previousHash": "821ae983f221108484b62a311f66fae53b00d65d7100dab2be7a3715320d0ed4",
+      "timeStamp": 1637216392667,
+      "merkleRoot": "810b00afca92d0cf2d1613de0d4e2c0b873ef1b61080aedebb50dace495f027c"
+    },
+    "drug": {
+      "drugId": "43a79cef-5aa6-4757-8ad1-6a44d1115c8c",
+      "name": "444",
+      "quantity": 444,
+      "description": "44444",
+      "status": "UNPROCESSED"
+    },
+    "tranx": {
+      "SIZE": 4,
+      "tranxLst": [
+        {
+          "transactionId": "dfdb8e52-0f83-4944-aa0b-f2e201708dbc",
+          "type": "SEND",
+          "personInCharge": "Tam Kai Jun",
+          "companyName": "Moody Co",
+          "companyLocation": "Bukit Jalil",
+          "businessType": "SUPPLIER",
+          "dateTime": {
+            "date": {
+              "year": 2021,
+              "month": 11,
+              "day": 18
+            },
+            "time": {
+              "hour": 14,
+              "minute": 19,
+              "second": 52,
+              "nano": 700376000
             }
           }
         }

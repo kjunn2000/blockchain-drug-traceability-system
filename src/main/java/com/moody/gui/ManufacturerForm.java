@@ -1,11 +1,14 @@
 package com.moody.gui;
 
-import com.moody.blockchain.*;
+import com.moody.blockchain.BusinessType;
+import com.moody.blockchain.TransactionRecord;
+import com.moody.blockchain.TransactionType;
+import com.moody.service.BlockchainService;
+import com.moody.service.BlockchainServiceImpl;
 
 import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.util.Objects;
 
 public class ManufacturerForm extends JFrame{
 
@@ -13,73 +16,45 @@ public class ManufacturerForm extends JFrame{
     private JTextField receiveDrugId;
     private JButton confirmReceiveBtn;
     private JLabel receiveDashboardErrorMsg;
-    private JLabel sendDashboardErrorMsg;
+    private JLabel msgLabel;
     private JTextField sendDrugId;
     private JButton confirmSendDashboard;
+    private BlockchainService blockchainService;
 
     public ManufacturerForm(String title) {
         super(title);
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         this.setContentPane(mainPanel);
         this.pack();
+        this.blockchainService = new BlockchainServiceImpl();
         confirmReceiveBtn.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent actionEvent) {
-                Block target = null;
-                Integer count = 0;
-                for (Block block : Blockchain.DB){
-                    if(Objects.isNull(block.getDrug())){
-                        count++;
-                        continue;
-                    }
-                    if (block.getDrug().getDrugId().toString().equals(receiveDrugId.getText())){
-                        target = block;
-                        break;
-                    }
-                    count++;
-                }
-                if (Objects.isNull(target)){
-                    receiveDashboardErrorMsg.setText("Invalid Drug ID");
-                    return;
-                }
-                Transaction newTranx = target.getTranx();
-                newTranx.add(new TransactionRecord(TransactionType.RECEIVED,
+                TransactionRecord transactionRecord = new TransactionRecord(TransactionType.RECEIVED,
                         "Chai Juo Ann",
                         "Moody Co",
                         "Bukit Jalil",
-                        BusinessType.MANUFACTURER));
-                target.setTranx(newTranx);
-                Blockchain.mining(count+1, target.getHeader().getCurrentHash());
-                Blockchain.persist();
-                Blockchain.distribute();
+                        BusinessType.MANUFACTURER);
+                if (blockchainService.addTransactionRecord(receiveDrugId.getText(), transactionRecord)){
+                    msgLabel.setText("Success add a receive record.");
+                }else {
+                    msgLabel.setText("Drug id not found.");
+                }
             }
         });
         confirmSendDashboard.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent actionEvent) {
-                Block target = null;
-                for (Block block : Blockchain.DB){
-                    if(Objects.isNull(block.getDrug())){
-                        continue;
-                    }
-                    if (block.getDrug().getDrugId().toString().equals(sendDrugId.getText())){
-                        target = block;
-                        break;
-                    }
-                }
-                if (Objects.isNull(target)){
-                    sendDashboardErrorMsg.setText("Invalid Drug ID");
-                    return;
-                }
-                Transaction newTranx = target.getTranx();
-                newTranx.add(new TransactionRecord(TransactionType.SEND,
+                TransactionRecord transactionRecord = new TransactionRecord(TransactionType.SEND,
                         "Chai Juo Ann",
                         "Moody Co",
                         "Bukit Jalil",
-                        BusinessType.MANUFACTURER));
-                target.setTranx(newTranx);
-                Blockchain.persist();
-                Blockchain.distribute();
+                        BusinessType.MANUFACTURER);
+                if (blockchainService.addTransactionRecord(sendDrugId.getText(), transactionRecord)){
+                    msgLabel.setText("Success add a send record.");
+                }else {
+                    msgLabel.setText("Drug id not found.");
+                }
             }
         });
     }
