@@ -12,16 +12,28 @@ public class Blockchain implements Serializable {
 
     private static final String CHAIN_FILE 		= 	"master/chain.bin";
 
-    private static final LinkedList<Block> DB 	= 	new LinkedList<>();
-
     private static final String LEDGER_FILE		=	"ledger.txt";
 
+    public static final LinkedList<Block> DB 	= 	new LinkedList<>();
+
+    public static void configure() {
+        Block genesis = new Block( "0", null);
+        Blockchain.nextBlock(genesis);
+        distribute();
+    }
+
+    public static void loadMasterFile(){
+        DB.addAll(get());
+    }
+
     public static void nextBlock( Block newBlock ) {
-        DB.add(newBlock);
+        if (DB != null) {
+            DB.add(newBlock);
+        }
         persist();
     }
 
-    private static void persist() {
+    public static void persist() {
         try(
                 FileOutputStream fos = new FileOutputStream( CHAIN_FILE );
                 ObjectOutputStream out = new ObjectOutputStream( fos );

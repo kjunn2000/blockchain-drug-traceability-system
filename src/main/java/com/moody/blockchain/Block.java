@@ -8,12 +8,14 @@ import java.sql.Timestamp;
 public class Block implements Serializable{
 
     private Header header;
+    private Drug drug;
     private Transaction tranx;
 
-    public Block(String previousHash ) {
+    public Block(String previousHash, Drug drug) {
         this.header = new Header();
         this.header.previousHash = previousHash;
         this.header.timeStamp = new Timestamp( System.currentTimeMillis() ).getTime();
+        this.drug = drug;
         generateHashValue();
     }
 
@@ -22,8 +24,16 @@ public class Block implements Serializable{
         generateMerkleRoot();
     }
 
+    public Drug getDrug() {
+        return drug;
+    }
+
     public Header getHeader() {
         return header;
+    }
+
+    public Transaction getTranx() {
+        return tranx;
     }
 
     public void generateMerkleRoot(){

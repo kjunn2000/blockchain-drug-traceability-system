@@ -6,19 +6,17 @@ import java.util.List;
 
 public class Transaction implements Serializable {
 
-    private final int SIZE = 5;
+    private final int SIZE = 4;
 
-    List<String> tranxLst;
+    List<TransactionRecord> tranxLst;
 
     public Transaction() {
         tranxLst = new ArrayList<>( SIZE );
     }
 
-    public void add( String tranx ){
+    public void add(TransactionRecord tranx ){
         tranxLst.add(tranx);
     }
-
-
 
     @Override
     public String toString() {
