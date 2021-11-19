@@ -7,6 +7,8 @@ import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.nio.file.StandardOpenOption;
 import java.util.LinkedList;
+import java.util.Objects;
+import java.util.Optional;
 import java.util.concurrent.atomic.AtomicInteger;
 
 public class Blockchain implements Serializable {
@@ -80,5 +82,11 @@ public class Blockchain implements Serializable {
             block.generateHashValue();
             prevHash = block.getHeader().getCurrentHash();
         }
+    }
+
+    public static Optional<Block> findBlock(String drugId){
+        return DB.stream()
+                .filter(block -> Objects.nonNull(block.getDrug()) && block.getDrug().getDrugId().toString().equals(drugId))
+                .findFirst();
     }
 }

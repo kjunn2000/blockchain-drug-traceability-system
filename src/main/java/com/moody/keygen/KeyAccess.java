@@ -17,13 +17,13 @@ public class KeyAccess {
      */
 
     public static PublicKey getPublicKey(String filename) throws Exception{
-        byte[] keyBytes = Files.readAllBytes( Paths.get( Configuration.PUBLICKEY_FILE+filename+"_pubkey") );
+        byte[] keyBytes = Files.readAllBytes( Paths.get( Configuration.KEY_FILE+filename+"/"+filename+"_pubkey") );
         X509EncodedKeySpec spec = new X509EncodedKeySpec( keyBytes );
         return KeyFactory.getInstance( Configuration.PUBLICKEY_ALGORITHM ).generatePublic(spec);
     }
 
     public static PrivateKey getPrivateKey(String filename) throws Exception{
-        byte[] keyBytes = Files.readAllBytes(Paths.get( Configuration.PRIVATEKEY_FILE+filename+"_prikey"));
+        byte[] keyBytes = Files.readAllBytes(Paths.get( Configuration.KEY_FILE+filename+"/"+filename+"_prikey"));
         PKCS8EncodedKeySpec spec = new PKCS8EncodedKeySpec( keyBytes );
         return KeyFactory.getInstance(Configuration.PUBLICKEY_ALGORITHM).generatePrivate(spec);
     }

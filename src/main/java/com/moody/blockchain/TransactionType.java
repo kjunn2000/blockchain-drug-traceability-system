@@ -1,5 +1,7 @@
 package com.moody.blockchain;
 
-public enum TransactionType {
+import java.io.Serializable;
+
+public enum TransactionType implements Serializable {
     SEND, RECEIVED
 }

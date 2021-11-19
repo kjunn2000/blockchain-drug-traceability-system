@@ -22,7 +22,7 @@ public class Transaction implements Serializable {
     }
 
     public void add(TransactionRecord tranx ){
-        String fileName = UserBank.getCurrentUser().getEncryptFullName();
+        String fileName = UserBank.getCurrentUser().getEncryptFullName().replaceAll("/","");
         try {
             PrivateKey privateKey = KeyAccess.getPrivateKey(fileName);
             DigitalSignatureImpl digitalSignature = new DigitalSignatureImpl();
@@ -32,6 +32,10 @@ public class Transaction implements Serializable {
         } catch (Exception e) {
             e.printStackTrace();
         }
+    }
+
+    public List<TransactionRecord> getTranxLst() {
+        return tranxLst;
     }
 
     @Override

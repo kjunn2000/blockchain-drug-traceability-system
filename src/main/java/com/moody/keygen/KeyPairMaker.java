@@ -27,35 +27,6 @@ public class KeyPairMaker {
         }
     }
 
-    /**
-     * create()
-     */
-    public static void create() {
-        try {
-            //KeyPairMaker object
-            KeyPairMaker maker = new KeyPairMaker();
-            //generate keypair
-            maker.keyPair = maker.keygen.generateKeyPair();
-            //get publickey
-            PublicKey pubkey = maker.keyPair.getPublic();
-            //get privatekey
-            PrivateKey prikey = maker.keyPair.getPrivate();
-
-            //view
-            System.out.println( "Public key: "+
-                    Base64.getEncoder().encodeToString( pubkey.getEncoded() ) );
-            System.out.println( "Private key: "+
-                    Base64.getEncoder().encodeToString( prikey.getEncoded() ) );
-
-            //keystore
-            put( pubkey.getEncoded(), Configuration.PUBLICKEY_FILE);
-            put( prikey.getEncoded(), Configuration.PRIVATEKEY_FILE );
-
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-    }
-
     public static void createWithFileName(String filename) {
         try {
             //KeyPairMaker object
@@ -74,8 +45,8 @@ public class KeyPairMaker {
                     Base64.getEncoder().encodeToString( prikey.getEncoded() ) );
 
             //keystore
-            put( pubkey.getEncoded(), Configuration.PUBLICKEY_FILE+filename+"_pubkey");
-            put( prikey.getEncoded(), Configuration.PRIVATEKEY_FILE+filename+"_prikey");
+            put( pubkey.getEncoded(), Configuration.KEY_FILE+filename+"/"+filename+"_pubkey");
+            put( prikey.getEncoded(), Configuration.KEY_FILE+filename+"/"+filename+"_prikey");
 
         } catch (Exception e) {
             e.printStackTrace();

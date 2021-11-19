@@ -3,7 +3,11 @@ package com.moody.service;
 import com.moody.authentication.UserBank;
 import com.moody.blockchain.*;
 
+import java.util.Comparator;
+import java.util.List;
 import java.util.Objects;
+import java.util.Optional;
+import java.util.stream.Collectors;
 
 public class BlockchainServiceImpl implements BlockchainService{
 
@@ -55,5 +59,17 @@ public class BlockchainServiceImpl implements BlockchainService{
         Blockchain.nextBlock( newBlock);
         Blockchain.distribute();
         return true;
+    }
+
+    @Override
+    public List<TransactionRecord> getTransactionRecordData(String drugId) {
+        Optional<Block> block = Blockchain.findBlock(drugId);
+        if(block.isEmpty()){
+            return null;
+        }
+
+        return block.get().getTranx().getTranxLst().stream()
+                .sorted(Comparator.comparing(TransactionRecord::getDateTime))
+                .collect(Collectors.toList());
     }
 }

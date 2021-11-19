@@ -16,7 +16,8 @@ public class Configuration {
     /**
      * Keystore directory path
      */
-    public static final String PUBLICKEY_FILE = "Keypair/PublicKey/";
-    public static final String PRIVATEKEY_FILE = "Keypair/PrivateKey/";
+//    public static final String PUBLICKEY_FILE = "Keypair/PublicKey/";
+//    public static final String PRIVATEKEY_FILE = "Keypair/PrivateKey/";
+    public static final String KEY_FILE= "Keypair/";
 
 }
