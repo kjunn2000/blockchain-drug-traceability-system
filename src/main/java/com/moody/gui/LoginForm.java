@@ -15,6 +15,7 @@ public class LoginForm extends JFrame{
     private JTextField passwordField;
     private JButton registerButton;
     private JLabel errorMsg;
+    private JButton guestLoginButton;
     private AuthenticationService authenticationService;
 
     public LoginForm(String title) {
@@ -39,6 +40,14 @@ public class LoginForm extends JFrame{
                 clearForm();
                 FormManager.closeForm(FormManager.loginForm);
                 FormManager.openForm(FormManager.registerForm);
+            }
+        });
+        guestLoginButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent actionEvent) {
+                clearForm();
+                FormManager.closeForm(FormManager.loginForm);
+                FormManager.openForm(FormManager.guestForm);
             }
         });
     }

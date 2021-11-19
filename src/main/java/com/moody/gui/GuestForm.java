@@ -6,6 +6,9 @@ import java.awt.*;
 public class GuestForm extends JFrame {
 
     private JPanel mainPanel;
+    private JTextField drugIdField;
+    private JTable trackingTable;
+    private JButton trackButton;
 
     public GuestForm(String title) {
         super(title);

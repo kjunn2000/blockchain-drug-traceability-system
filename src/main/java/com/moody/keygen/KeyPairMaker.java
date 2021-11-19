@@ -21,7 +21,7 @@ public class KeyPairMaker {
     public KeyPairMaker() {
         try {
             keygen = KeyPairGenerator.getInstance( Configuration.PUBLICKEY_ALGORITHM );
-            keygen.initialize( 1024 );
+            keygen.initialize( 2048);
         } catch (Exception e) {
             e.printStackTrace();
         }

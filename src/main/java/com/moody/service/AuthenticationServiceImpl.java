@@ -62,6 +62,7 @@ public class AuthenticationServiceImpl implements AuthenticationService {
         } catch (InvalidKeyException | BadPaddingException | IllegalBlockSizeException e) {
             e.printStackTrace();
         }
+        encryptFullName = encryptFullName.replaceAll("/","");
         user.setEncryptFullName(encryptFullName);
         KeyPairMaker.createWithFileName(encryptFullName);
         UserBank.addUser(user);

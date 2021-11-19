@@ -13,6 +13,7 @@ public class TransactionRecord implements Serializable {
     private String companyLocation;
     private BusinessType businessType;
     private LocalDateTime dateTime;
+    private String digitalSignature;
 
     public TransactionRecord(TransactionType type, String personInCharge, String companyName, String companyLocation, BusinessType businessType) {
         this.transactionId = UUID.randomUUID();
@@ -78,5 +79,26 @@ public class TransactionRecord implements Serializable {
 
     public void setDateTime(LocalDateTime dateTime) {
         this.dateTime = dateTime;
+    }
+
+    public String getDigitalSignature() {
+        return digitalSignature;
+    }
+
+    public void setDigitalSignature(String digitalSignature) {
+        this.digitalSignature = digitalSignature;
+    }
+
+    @Override
+    public String toString() {
+        return "TransactionRecord{" +
+                "transactionId=" + transactionId +
+                ", type=" + type +
+                ", personInCharge='" + personInCharge + '\'' +
+                ", companyName='" + companyName + '\'' +
+                ", companyLocation='" + companyLocation + '\'' +
+                ", businessType=" + businessType +
+                ", dateTime=" + dateTime +
+                '}';
     }
 }
