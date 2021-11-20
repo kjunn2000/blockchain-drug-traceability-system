@@ -19,21 +19,21 @@ public class Block implements Serializable{
         generateHashValue();
     }
 
-    public void setTranx(Transaction tranx) {
-        this.tranx = tranx;
-        generateMerkleRoot();
+    public Header getHeader() {
+        return header;
     }
 
     public Drug getDrug() {
         return drug;
     }
 
-    public Header getHeader() {
-        return header;
-    }
-
     public Transaction getTranx() {
         return tranx;
+    }
+
+    public void setTranx(Transaction tranx) {
+        this.tranx = tranx;
+        generateMerkleRoot();
     }
 
     public void generateMerkleRoot(){

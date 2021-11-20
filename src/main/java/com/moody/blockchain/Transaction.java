@@ -1,19 +1,17 @@
 package com.moody.blockchain;
 
 import com.moody.authentication.UserBank;
-import com.moody.crypto.ASymmCrypto;
 import com.moody.digitalSignature.DigitalSignatureImpl;
 import com.moody.keygen.KeyAccess;
 
 import java.io.Serializable;
 import java.security.PrivateKey;
-import java.security.PublicKey;
 import java.util.ArrayList;
 import java.util.List;
 
 public class Transaction implements Serializable {
 
-    private final int SIZE = 4;
+    private final int SIZE = 6;
 
     List<TransactionRecord> tranxLst;
 

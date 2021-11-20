@@ -85,12 +85,21 @@
         <constraints>
           <grid row="5" column="1" row-span="1" col-span="2" vsize-policy="7" hsize-policy="7" anchor="0" fill="3" indent="0" use-parent-layout="false"/>
         </constraints>
-        <properties/>
+        <properties>
+          <horizontalScrollBarPolicy value="31"/>
+          <verticalScrollBarPolicy value="22"/>
+        </properties>
         <border type="none"/>
         <children>
           <component id="196e0" class="javax.swing.JTextArea" binding="digitalSignatureArea">
             <constraints/>
-            <properties/>
+            <properties>
+              <editable value="false"/>
+              <enabled value="true"/>
+              <lineWrap value="true"/>
+              <rows value="3"/>
+              <wrapStyleWord value="false"/>
+            </properties>
           </component>
         </children>
       </scrollpane>

@@ -11,4 +11,5 @@ public interface BlockchainService {
     boolean addTransactionRecord(String drugId, TransactionType type);
     boolean addNewDrug(Drug drug);
     List<TransactionRecord> getTransactionRecordData(String drugId);
+    boolean verifyDigitalSignature(TransactionRecord record);
 }

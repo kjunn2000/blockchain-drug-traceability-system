@@ -1,18 +1,12 @@
 package com.moody.crypto;
 
-
-import com.moody.blockchain.TransactionRecord;
-
 import javax.crypto.Cipher;
-import java.io.*;
 import java.security.PrivateKey;
 import java.security.PublicKey;
 import java.util.Base64;
 
 public class ASymmCrypto {
 
-    //Q: Whats the API needed to support en/de-cryption?
-    //A: Cipher
     private Cipher cipher;
 
     public ASymmCrypto() {
@@ -23,9 +17,6 @@ public class ASymmCrypto {
         }
     }
 
-    /**
-     * encrypt(String, PublicKey)
-     */
     public String encrypt( String input, PublicKey key ) throws Exception{
         String cipherText = null;
         cipher.init(Cipher.ENCRYPT_MODE, key);
@@ -35,10 +26,6 @@ public class ASymmCrypto {
         return cipherText;
     }
 
-
-    /**
-     * decrypt(String, PrivateKey)
-     */
     public String decrypt( String cipherText, PrivateKey key ) throws Exception{
         cipher.init(Cipher.DECRYPT_MODE, key);
         cipher.update( Base64.getDecoder().decode( cipherText.getBytes() ) );

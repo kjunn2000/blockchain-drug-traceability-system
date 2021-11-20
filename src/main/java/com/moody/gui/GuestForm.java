@@ -90,33 +90,18 @@ public class GuestForm extends JFrame {
         verifySignatureButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent actionEvent) {
-                DigitalSignature digitalSignature = new DigitalSignatureImpl();
-                TransactionRecord selectedRecord = transactionRecords.get(historyTable.getSelectedRow());
-                SymmCrypto symmCrypto = new SymmCrypto();
-                String filename = "";
-                try {
-                    filename = symmCrypto.encrypt(selectedRecord.getPersonInCharge(), SecretCharsKeyGen.keygen()).replaceAll("/","");
-                } catch (InvalidKeyException | BadPaddingException | IllegalBlockSizeException e) {
-                    e.printStackTrace();
-                }
 
-                try {
-                    boolean result = digitalSignature.verify(selectedRecord.toString()
-                            , selectedRecord.getDigitalSignature()
-                            , KeyAccess.getPublicKey(filename));
-                    if (result) {
-                        JOptionPane.showMessageDialog(FormManager.guestForm
-                                , "Verified Successful!"
-                                , "Configurations"
-                                , JOptionPane.INFORMATION_MESSAGE);
-                    }else{
-                        JOptionPane.showMessageDialog(FormManager.guestForm
-                                , "Verified Successful!"
-                                ,"Alert"
-                                ,JOptionPane.WARNING_MESSAGE);
-                    }
-                } catch (Exception e) {
-                    e.printStackTrace();
+                boolean result = blockchainService.verifyDigitalSignature(transactionRecords.get(historyTable.getSelectedRow()));
+                if (result) {
+                    JOptionPane.showMessageDialog(FormManager.guestForm
+                            , "Verified Successful!"
+                            , "Congratulations"
+                            , JOptionPane.INFORMATION_MESSAGE);
+                }else{
+                    JOptionPane.showMessageDialog(FormManager.guestForm
+                            , "Verified Fail!"
+                            ,"Alert"
+                            ,JOptionPane.WARNING_MESSAGE);
                 }
             }
         });

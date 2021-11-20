@@ -6,15 +6,13 @@ import java.security.MessageDigest;
 
 public class Hasher {
 
-    public static String hash( String data, String algorithm )
-    {
+    public static String hash( String data, String algorithm ){
         String hash = null;
         try {
             MessageDigest md = MessageDigest.getInstance(algorithm);
             md.update( data.getBytes() );
             byte[] hashBytes = md.digest();
             hash = String.valueOf( Hex.encodeHex(hashBytes) );
-
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -46,5 +44,4 @@ public class Hasher {
         }
         return hash;
     }
-
 }

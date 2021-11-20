@@ -2,96 +2,31 @@
   {
     "header": {
       "index": 0,
-      "currentHash": "dfc4bd3ca808fc02240c3652ebe337e4044496b3ebe55a45e741702eaac8a248",
+      "currentHash": "744bba672a81fd591f54d7919ec7b196167ce3145ee824975534d415c91e5879",
       "previousHash": "0",
-      "timeStamp": 1637301140253
+      "timeStamp": 1637390041652
     }
   },
   {
     "header": {
       "index": 1,
-      "currentHash": "fe1a669c42b971c89170f5898e8021d2d5c56f6c9c304e4b734492001356d5ab",
-      "previousHash": "dfc4bd3ca808fc02240c3652ebe337e4044496b3ebe55a45e741702eaac8a248",
-      "timeStamp": 1637301161266,
-      "merkleRoot": "5848e7fa9ceaad0c63be23963b5909dca71a61dd68c7c125bf8e882c6913cada"
+      "currentHash": "ac42e2d5d414baea0665336f4b7f22d3543bd1c92baee8568f478d3010e9fde3",
+      "previousHash": "744bba672a81fd591f54d7919ec7b196167ce3145ee824975534d415c91e5879",
+      "timeStamp": 1637390157642,
+      "merkleRoot": "e458500d716abe56dad9b5a2ba87f45122078050f59d1ac2fb2cd4aeb638a458"
     },
     "drug": {
-      "drugId": "9e6b2b74-5240-4a01-a068-92d7323df202",
+      "drugId": "79a40638-dfaf-4da6-b7db-38520cb27252",
       "name": "drug1",
-      "quantity": 111,
-      "description": "11111",
-      "status": "UNPROCESSED"
-    },
-    "tranx": {
-      "SIZE": 4,
-      "tranxLst": [
-        {
-          "transactionId": "494d6985-7607-42e8-a694-2f481dc50d71",
-          "type": "SEND",
-          "personInCharge": "tester1",
-          "companyName": "Moody",
-          "companyLocation": "SUPPLIER",
-          "businessType": "SUPPLIER",
-          "dateTime": {
-            "date": {
-              "year": 2021,
-              "month": 11,
-              "day": 19
-            },
-            "time": {
-              "hour": 13,
-              "minute": 52,
-              "second": 41,
-              "nano": 285847000
-            }
-          },
-          "digitalSignature": "QN0u5TqJDC/GGSYCO8vGtd6DU2RQf0kDMLZoQh2O/dHr0pKmcbYon8VUEzJ5AH75U6oqKxckz+8yY6cY3LGtqnGiTjenMJkeL5rwHChJuJLfSFi6N2NorEqJZ5TPrApN4eLnFXuej57fWypeIRt9Cq0gh2zz87qu7GiAPDMBgVLv5n8K84H1dDnwBjInGVydQEwORX1Fzg30artrPTz7tksNICMRO2mnMDpUIMeeADOx44y1rS+SxBQLOdoPa0lMzMGPgRwWKcWN1BA/WViIncgc9fop5txsE9BNrJunYFyDPB7O6SSdPzJ7+Wq4wiLu90HS/15aH7V6VMk3/pHvPw\u003d\u003d"
-        },
-        {
-          "transactionId": "a1da5602-6622-4d34-a9b6-fb313a5d034a",
-          "type": "RECEIVED",
-          "personInCharge": "tester2",
-          "companyName": "Sun Co",
-          "companyLocation": "Bukit Bintang",
-          "businessType": "MANUFACTURER",
-          "dateTime": {
-            "date": {
-              "year": 2021,
-              "month": 11,
-              "day": 19
-            },
-            "time": {
-              "hour": 13,
-              "minute": 52,
-              "second": 57,
-              "nano": 891802000
-            }
-          },
-          "digitalSignature": "dTa/4XkIzGme7xvqDPFPNaT/MbuUAxtZTFwPFa6VZ5Pr1XONl4kyN0YyK0k84fVJZaOomloyX0Re7aTRV+4/IutoSU29LMxx0j93HexUYk6mAKf9s2WaBJZ+14wdxuA7t8BEModtMZNxlJly/U1uAnVHAoobNQULdLvFRA3JfFd6psWju55+C2qVvTGKllAjNccflcIb25JQXXH05/KJeOJ7Er3CoMe5H7oIA9a90FbJtNHsyUBlAJcmrDAp3vylaAWo+KIJ7T/wS2zGrlgkd7kcWhifGiKSFYV0p7oSuMWKZQ/AfthKFouC8urSTULOMwiGdJKSL9JnbeN7NaWHnw\u003d\u003d"
-        }
-      ]
-    }
-  },
-  {
-    "header": {
-      "index": 2,
-      "currentHash": "582b4f43dad53c52baa5f7103c830c2a6fff36a1b8f962d0f28217e79e7d855c",
-      "previousHash": "fe1a669c42b971c89170f5898e8021d2d5c56f6c9c304e4b734492001356d5ab",
-      "timeStamp": 1637309271807,
-      "merkleRoot": "479650639ee18603f70bbe1f2b9a05665e835a1b09296401dbb139b829adfb0d"
-    },
-    "drug": {
-      "drugId": "71949670-d25c-4d90-936e-5b6a6b2e1859",
-      "name": "sample",
       "quantity": 1,
-      "description": "1",
+      "description": "111",
       "status": "UNPROCESSED"
     },
     "tranx": {
       "SIZE": 4,
       "tranxLst": [
         {
-          "transactionId": "cd3022c1-501c-4dbe-bda1-cf2993aa8c34",
+          "transactionId": "0b2b4c10-a3f0-4b33-b26a-434812bfd3b0",
           "type": "SEND",
           "personInCharge": "tester1",
           "companyName": "MoodyJun",
@@ -101,19 +36,19 @@
             "date": {
               "year": 2021,
               "month": 11,
-              "day": 19
+              "day": 20
             },
             "time": {
-              "hour": 16,
-              "minute": 7,
-              "second": 51,
-              "nano": 836184000
+              "hour": 14,
+              "minute": 35,
+              "second": 57,
+              "nano": 676311000
             }
           },
-          "digitalSignature": "M8gpkQdKNH6qOe5oz41bJrRen24o2EfHS6Q2WA+K5QskfQaKjm6BI0iPAJGiop6w/DA+71vVdeNqmlO5t43rFYU7WblMn5mZ4zjgl96+p+f89O0znKmu5SGu6FSoTJKDZhW/kjnxFwY0jRS9a8ANL0P1dmwmXAebHIrHsMqcPCT1wVvJWekk4XBZiq5HZVVEZMNbAO39AuezrEni6QTiIAgDBgXBUtQAwMss022qWeNxg7i1ArJHeqOatpO7XeGmnjG/qHuRYnKHzIwpkr4jJN3FANKEfYzBuo7YTqSWjN/SEHdjl3vKN5K3MR5ZNp4m7m3+S/hMTza3LCwukVgebA\u003d\u003d"
+          "digitalSignature": "XoeQ3EgowqI5OXZX3ktw6+B9xrAlMCd+eOEeBg7ocdTGQxmIcN0mzShHlZXjtzQK7D/QlD5ry3qpTM704D+MGGqZJaNXxP28uxebClEcZoDFX+wy4FsM7SbL0w3JBN7VDI4IvSPfjmQZIo/s3W3XETaXVv5xIanhAzEBRcswg9xd3RKBTJZmRb9Ykgq5FXn/ALRr90OSWJjGvI+MqIZCYlBRao6cXtUd6zGus8HhE0rKbI0KRLBdD5iMlLzpmk7nHI/hU/i6lckj/SxvEaNaDrx2gDXZfqjlneRAXuD9J6cj/lJdGV4gRA8uNPhNAlr9nMcjyLkrcR4bdk6d4tszeQ\u003d\u003d"
         },
         {
-          "transactionId": "c6a65413-4bf8-46d1-a0c2-34a7098b9d0f",
+          "transactionId": "4b20fdb6-f35c-450c-9982-d9064752a286",
           "type": "RECEIVED",
           "personInCharge": "tester2",
           "companyName": "MoodyJun",
@@ -123,38 +58,38 @@
             "date": {
               "year": 2021,
               "month": 11,
-              "day": 19
+              "day": 20
             },
             "time": {
-              "hour": 16,
-              "minute": 8,
-              "second": 54,
-              "nano": 621905000
+              "hour": 14,
+              "minute": 36,
+              "second": 16,
+              "nano": 783418000
             }
           },
-          "digitalSignature": "cuKgf2zyfqLcUa1/FS1QIkv4Q3Nd7ul9QFCOprpE940335OlK7ey81sH72HZ6wzET2nAkXMCGVdKLCKc5owcCKrPlV5cuVbR/wISs6mW8TW1QrDjLF1EtVPhhRdGb3rkUf3RVpjllGQkT8GFs8mYejMrvfcIRWBzJgBNjtizI9cWSfqwlwOLKc0uJWCjQ+lYR/zBVe6cKAj9D1Bq23Gyv5gK0GGoUCoWfEccAMmuqiwmGp0UjNc7G4T0bKioW5FVNlFNXlMflOGmNof1WjqqvqGTP1HcEEo7jiNKW36VJb4c3W/Fs7zwFuz0bGSHaDMis1V0Nu+XbWB0Ot/yoW+t/w\u003d\u003d"
+          "digitalSignature": "DGbxJfTExUcZ1W1xDmt0yULddOaTZJWnrTb7RHhNNV8spx8NfFiNmL78nCdN2llAayhmhAOlBPtLuJi77gXFfh7hlwKexPRaTGPVIWvBGjbYDxiIyP33il8ImLhs+Cc9NOtimrf5ctagEHy0otT0X6u3uwOgV12qLpbbH069MUQ4+hYUTdNGduha3Fb2sVFWFoZsEXOw5Q6LzeFzylfP/GzodtgY4fdrLd7zS7AVQCBxGVRpKj1xvoaQ8dU7MV2xQ0db8QmZSFkE2LVHi7OT78KqzLkoAfaXnapl5BMycQoyBcnJvZ0rD+Np6x8hOVxK0FvYNaEZ2bybW2q6JZKNaA\u003d\u003d"
         },
         {
-          "transactionId": "72528a9a-73b8-4422-a004-25961f9ac3fd",
+          "transactionId": "66e60b53-4fb0-4061-81c5-944f1d43c07f",
           "type": "SEND",
           "personInCharge": "tester2",
           "companyName": "MoodyJun",
-          "companyLocation": "Bukit Negara",
+          "companyLocation": "Bukit",
           "businessType": "MANUFACTURER",
           "dateTime": {
             "date": {
               "year": 2021,
               "month": 11,
-              "day": 19
+              "day": 20
             },
             "time": {
-              "hour": 16,
-              "minute": 8,
-              "second": 57,
-              "nano": 193723000
+              "hour": 14,
+              "minute": 36,
+              "second": 18,
+              "nano": 423845000
             }
           },
-          "digitalSignature": "d0d9GzzEoG3VsYDKfsw36PGn3wMACh/pwQBwi9RoX/I6xNUWKb6OsABmow6VVi48GIQk78+Ev75EuZvaW0bmu9K7m7eFYPogrsL/bbXQuSzoMNkE13sQLFru0ocmPf50DQ6277NSX6vhBj8xAwYRpbBEPsoJx4xqj2l3719y/ZdZempMDi6ueHKtDu3dfXQKCv7u5WzUTgrqTbWZzNVJJj3YAxV1KGiFPsOeI5rQJaY2HC/VMZASK8P1wOpGHoJz/MdMptRwFv09qi0WwBGeq9GuZwEvy61D09Xj5CWBnfpDElyT1xx6rhDA3cAgdrkD34BvprAoU0iywSgTAwHDmA\u003d\u003d"
+          "digitalSignature": "PgtYI7vhTr2fmOjPUnobP5t+5v44Kzma92lh4gi2sp7jacY60AsrxzNFnacyaTQoMfHkG6CPB00qFJFoMD7QYNyS0UmO1hNZr9zmbjoRwDacU3vR0kN28We4Y8gXRMJbRXRoBJVQcIXOJ4ZgegWqcl7iFO0RSJol2GYj9LaX6YJuHNW+l2RbbDftCRhDSbG92aE6a4OC8TkfJbjg5BH//ifBaaVBn7/Xec+duRkTzmmD1nYTE7chNS40+4c12kugh9gpuWPnFE8u9eETxkN5CTunCDCLE8dpTXaZG4rqg1SbRGO7daF4251GiD99B7TQtHmnjnPkF7WOAMV+BQgmHA\u003d\u003d"
         }
       ]
     }

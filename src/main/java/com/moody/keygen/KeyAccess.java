@@ -12,10 +12,6 @@ import java.security.spec.X509EncodedKeySpec;
 
 public class KeyAccess {
 
-    /**
-     * read the key
-     */
-
     public static PublicKey getPublicKey(String filename) throws Exception{
         byte[] keyBytes = Files.readAllBytes( Paths.get( Configuration.KEY_FILE+filename+"/"+filename+"_pubkey") );
         X509EncodedKeySpec spec = new X509EncodedKeySpec( keyBytes );

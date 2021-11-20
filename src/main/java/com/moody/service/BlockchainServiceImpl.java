@@ -2,7 +2,15 @@ package com.moody.service;
 
 import com.moody.authentication.UserBank;
 import com.moody.blockchain.*;
+import com.moody.crypto.SymmCrypto;
+import com.moody.digitalSignature.DigitalSignature;
+import com.moody.digitalSignature.DigitalSignatureImpl;
+import com.moody.keygen.KeyAccess;
+import com.moody.keygen.SecretCharsKeyGen;
 
+import javax.crypto.BadPaddingException;
+import javax.crypto.IllegalBlockSizeException;
+import java.security.InvalidKeyException;
 import java.util.Comparator;
 import java.util.List;
 import java.util.Objects;
@@ -71,5 +79,32 @@ public class BlockchainServiceImpl implements BlockchainService{
         return block.get().getTranx().getTranxLst().stream()
                 .sorted(Comparator.comparing(TransactionRecord::getDateTime))
                 .collect(Collectors.toList());
+    }
+
+    @Override
+    public boolean verifyDigitalSignature(TransactionRecord record) {
+        String fileName = getKeyFileNameByUserFullName(record.getPersonInCharge());
+        DigitalSignature digitalSignature = new DigitalSignatureImpl();
+
+        try {
+            return digitalSignature.verify(record.toString()
+                    , record.getDigitalSignature()
+                    , KeyAccess.getPublicKey(fileName));
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return false;
+    }
+
+    private String getKeyFileNameByUserFullName(String fullName){
+        String filename = "";
+        SymmCrypto symmCrypto = new SymmCrypto();
+        try {
+            filename = symmCrypto.encrypt(fullName, SecretCharsKeyGen.keygen())
+                    .replaceAll("/","");
+        } catch (InvalidKeyException | BadPaddingException | IllegalBlockSizeException e) {
+            e.printStackTrace();
+        }
+        return filename;
     }
 }

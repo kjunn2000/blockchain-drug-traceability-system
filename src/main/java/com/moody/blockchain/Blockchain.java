@@ -9,7 +9,6 @@ import java.nio.file.StandardOpenOption;
 import java.util.LinkedList;
 import java.util.Objects;
 import java.util.Optional;
-import java.util.concurrent.atomic.AtomicInteger;
 
 public class Blockchain implements Serializable {
 
@@ -30,9 +29,7 @@ public class Blockchain implements Serializable {
     }
 
     public static void nextBlock( Block newBlock ) {
-        if (DB != null) {
-            DB.add(newBlock);
-        }
+        DB.add(newBlock);
         persist();
     }
 

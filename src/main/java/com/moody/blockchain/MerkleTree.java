@@ -2,6 +2,8 @@ package com.moody.blockchain;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.UUID;
+import java.util.stream.Collectors;
 
 public class MerkleTree {
 
@@ -26,12 +28,9 @@ public class MerkleTree {
     }
 
     public void build() {
-
-        List<String> tempLst = new ArrayList<>();
-
-        for (TransactionRecord tranx : this.tranxLst) {
-            tempLst.add(tranx.getTransactionId().toString());
-        }
+        List<String> tempLst = this.tranxLst.stream()
+                .map(TransactionRecord::toString)
+                .collect(Collectors.toList());
 
         List<String> hashes = genTranxHashLst( tempLst );
         while(  hashes.size() != 1 ) {
