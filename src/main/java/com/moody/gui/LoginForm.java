@@ -15,15 +15,15 @@ public class LoginForm extends JFrame{
     private JTextField passwordField;
     private JButton registerButton;
     private JLabel errorMsg;
-    private JButton guestLoginButton;
+    private JButton trackingDashboardBtn;
     private AuthenticationService authenticationService;
 
-    public LoginForm(String title) {
+    public LoginForm(String title, AuthenticationService authenticationService) {
         super(title);
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         this.setContentPane(mainPanel);
         this.pack();
-        authenticationService = new AuthenticationServiceImpl();
+        this.authenticationService = authenticationService;
         loginButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent actionEvent) {
@@ -42,12 +42,12 @@ public class LoginForm extends JFrame{
                 FormManager.openForm(FormManager.registerForm);
             }
         });
-        guestLoginButton.addActionListener(new ActionListener() {
+        trackingDashboardBtn.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent actionEvent) {
                 clearForm();
                 FormManager.closeForm(FormManager.loginForm);
-                FormManager.openForm(FormManager.guestForm);
+                FormManager.openForm(FormManager.trackingForm);
             }
         });
     }

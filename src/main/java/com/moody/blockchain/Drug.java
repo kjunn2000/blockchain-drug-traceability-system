@@ -8,13 +8,15 @@ public class Drug implements Serializable {
     private UUID drugId;
     private String name;
     private BigInteger quantity;
+    private String unitPrice;
     private String description;
     private DrugStatus status;
 
-    public Drug(String name, BigInteger quantity, String description, DrugStatus status) {
+    public Drug(String name, BigInteger quantity, String unitPrice, String description, DrugStatus status) {
         this.drugId = UUID.randomUUID();
         this.name = name;
         this.quantity = quantity;
+        this.unitPrice = unitPrice;
         this.description = description;
         this.status = status;
     }
@@ -41,6 +43,14 @@ public class Drug implements Serializable {
 
     public void setQuantity(BigInteger quantity) {
         this.quantity = quantity;
+    }
+
+    public String getUnitPrice() {
+        return unitPrice;
+    }
+
+    public void setUnitPrice(String unitPrice) {
+        this.unitPrice = unitPrice;
     }
 
     public String getDescription() {

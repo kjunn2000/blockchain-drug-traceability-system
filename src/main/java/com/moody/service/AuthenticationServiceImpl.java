@@ -66,6 +66,8 @@ public class AuthenticationServiceImpl implements AuthenticationService {
         encryptFullName = encryptFullName.replaceAll("/","");
         KeyPairMaker.createWithFileName(encryptFullName);
         UserBank.addUser(user);
+
+        FormManager.supplierForm.fetchManufacturerList();
         FormManager.closeForm(FormManager.registerForm);
         FormManager.openForm(FormManager.loginForm);
         return true;

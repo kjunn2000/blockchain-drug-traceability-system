@@ -61,4 +61,8 @@ public class UserBank {
     public static void setCurrentUser(User currentUser) {
         UserBank.currentUser = currentUser;
     }
+
+    public static List<User> getAllManufacturer() {
+        return userList.stream().filter(user -> user.getBusinessType().equals(BusinessType.MANUFACTURER)).collect(Collectors.toList());
+    }
 }

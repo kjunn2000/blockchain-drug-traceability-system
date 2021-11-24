@@ -6,11 +6,13 @@ import com.moody.service.FormManager;
 
 public class Main {
 
-
     public static void main(String[] args) throws Exception {
         UserBank.loadUserData();
 
+//        The configure() should be done once at the start of the blockchain
 //        Blockchain.configure();
+
+//        After first time can directly load master file
         Blockchain.loadMasterFile();
 
         FormManager.openForm(FormManager.loginForm);

@@ -1,37 +1,28 @@
 package com.moody.gui;
 
+import com.moody.authentication.User;
 import com.moody.authentication.UserBank;
+import com.moody.blockchain.Block;
+import com.moody.blockchain.BusinessType;
+import com.moody.blockchain.Drug;
 import com.moody.blockchain.TransactionRecord;
-import com.moody.crypto.ASymmCrypto;
-import com.moody.crypto.SymmCrypto;
-import com.moody.digitalSignature.DigitalSignature;
-import com.moody.digitalSignature.DigitalSignatureImpl;
-import com.moody.keygen.KeyAccess;
-import com.moody.keygen.SecretCharsKeyGen;
 import com.moody.service.BlockchainService;
-import com.moody.service.BlockchainServiceImpl;
 import com.moody.service.FormManager;
 
-import javax.crypto.BadPaddingException;
-import javax.crypto.IllegalBlockSizeException;
 import javax.swing.*;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
-import javax.swing.table.DefaultTableColumnModel;
 import javax.swing.table.DefaultTableModel;
-import javax.swing.table.TableCellRenderer;
-import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.awt.event.FocusAdapter;
-import java.awt.event.FocusEvent;
-import java.security.InvalidKeyException;
-import java.security.PublicKey;
 import java.text.Normalizer;
 import java.time.format.DateTimeFormatter;
+import java.util.Comparator;
 import java.util.List;
+import java.util.Objects;
+import java.util.stream.Collectors;
 
-public class GuestForm extends JFrame {
+public class TrackingForm extends JFrame {
 
     private JPanel mainPanel;
     private JTextField drugIdField;
@@ -40,27 +31,48 @@ public class GuestForm extends JFrame {
     private JTable historyTable;
     private JButton verifySignatureButton;
     private JTextArea digitalSignatureArea;
+    private JButton backBtn;
+    private JTextField quantityField;
+    private JTextField drugNameField;
+    private JTextField descriptionField;
+    private JTextField unitPriceField;
+    private JTextField statusField;
     private BlockchainService blockchainService;
     private JScrollPane scrollPane;
     private List<TransactionRecord> transactionRecords;
 
-    public GuestForm(String title) {
+    public TrackingForm(String title, BlockchainService blockchainService) {
         super(title);
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         this.setContentPane(mainPanel);
         this.pack();
-        blockchainService = new BlockchainServiceImpl();
+        this.blockchainService = blockchainService;
 
         setTableData(null);
 
         trackButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent actionEvent) {
-                List<TransactionRecord> transactionRecordData = blockchainService.getTransactionRecordData(drugIdField.getText());
+                Block block = blockchainService.findBlock(drugIdField.getText());
+                List<TransactionRecord> transactionRecordData = sortTransactionData(block);
+
                 if (transactionRecordData == null){
                     errMsg.setText("Drug ID not found.");
                     return;
                 }
+
+                Drug drug = block.getDrug();
+                drugNameField.setText(drug.getName());
+                quantityField.setText(drug.getQuantity().toString());
+                descriptionField.setText(drug.getDescription());
+                User user = UserBank.getCurrentUser();
+                unitPriceField.setText(drug.getUnitPrice());
+                if(Objects.nonNull(user) && user.getBusinessType().equals(BusinessType.MANUFACTURER)){
+                    String decryptUnitPrice = blockchainService.decryptUnitPrice(drug.getUnitPrice());
+                    unitPriceField.setText(decryptUnitPrice);
+                }
+                statusField.setText(drug.getStatus().toString());
+
                 transactionRecords = transactionRecordData;
                 String[][] data = new String[transactionRecordData.size()][7];
                 DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
@@ -83,6 +95,9 @@ public class GuestForm extends JFrame {
         });
         historyTable.getSelectionModel().addListSelectionListener(new ListSelectionListener(){
             public void valueChanged(ListSelectionEvent event) {
+                if(historyTable.getSelectedRow() < 0 || historyTable.getSelectedRow() >= transactionRecords.size()){
+                    return;
+                }
                 TransactionRecord selectedRecord = transactionRecords.get(historyTable.getSelectedRow());
                 digitalSignatureArea.setText(selectedRecord.getDigitalSignature());
             }
@@ -93,23 +108,53 @@ public class GuestForm extends JFrame {
 
                 boolean result = blockchainService.verifyDigitalSignature(transactionRecords.get(historyTable.getSelectedRow()));
                 if (result) {
-                    JOptionPane.showMessageDialog(FormManager.guestForm
+                    JOptionPane.showMessageDialog(FormManager.trackingForm
                             , "Verified Successful!"
                             , "Congratulations"
                             , JOptionPane.INFORMATION_MESSAGE);
                 }else{
-                    JOptionPane.showMessageDialog(FormManager.guestForm
+                    JOptionPane.showMessageDialog(FormManager.trackingForm
                             , "Verified Fail!"
                             ,"Alert"
                             ,JOptionPane.WARNING_MESSAGE);
                 }
             }
         });
+        backBtn.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent actionEvent) {
+                clearForm();
+                FormManager.closeForm(FormManager.trackingForm);
+                User currentUser = UserBank.getCurrentUser();
+                if(!Objects.nonNull(currentUser)){
+                    FormManager.openForm(FormManager.loginForm);
+                }else if (currentUser.getBusinessType() == BusinessType.SUPPLIER){
+                    FormManager.openForm(FormManager.supplierForm);
+                }else if (currentUser.getBusinessType() == BusinessType.MANUFACTURER){
+                    FormManager.openForm(FormManager.manufacturerForm);
+                }else if (currentUser.getBusinessType() == BusinessType.PHARMACY){
+                    FormManager.openForm(FormManager.phamarcyForm);
+                }
+        }
+        });
+    }
+
+    public List<TransactionRecord> sortTransactionData(Block block) {
+        return block.getTranx().getTranxLst().stream()
+                .sorted(Comparator.comparing(TransactionRecord::getDateTime))
+                .collect(Collectors.toList());
     }
 
     public void clearForm(){
         drugIdField.setText("");
         errMsg.setText("");
+        setTableData(null);
+        digitalSignatureArea.setText("");
+        drugNameField.setText("");
+        quantityField.setText("");
+        descriptionField.setText("");
+        unitPriceField.setText("");
+        statusField.setText("");
     }
 
     public void setTableData(String[][] data){

@@ -1,7 +1,9 @@
 package com.moody.service;
 
+import com.moody.authentication.User;
 import com.moody.authentication.UserBank;
 import com.moody.blockchain.*;
+import com.moody.crypto.ASymmCrypto;
 import com.moody.crypto.SymmCrypto;
 import com.moody.digitalSignature.DigitalSignature;
 import com.moody.digitalSignature.DigitalSignatureImpl;
@@ -11,6 +13,8 @@ import com.moody.keygen.SecretCharsKeyGen;
 import javax.crypto.BadPaddingException;
 import javax.crypto.IllegalBlockSizeException;
 import java.security.InvalidKeyException;
+import java.security.PrivateKey;
+import java.security.PublicKey;
 import java.util.Comparator;
 import java.util.List;
 import java.util.Objects;
@@ -46,6 +50,22 @@ public class BlockchainServiceImpl implements BlockchainService{
         Transaction newTranx = target.getTranx();
         newTranx.add(record);
         target.setTranx(newTranx);
+        if (type == TransactionType.RECEIVED){
+            switch(UserBank.getCurrentUser().getBusinessType()){
+                case MANUFACTURER: {
+                    target.getDrug().setStatus(DrugStatus.MANUFACTURING);
+                    break;
+                }
+                case DISTRIBUTOR: {
+                    target.getDrug().setStatus(DrugStatus.DISTRIBUTING);
+                    break;
+                }
+                case PHARMACY: {
+                    target.getDrug().setStatus(DrugStatus.RECEIVED);
+                    break;
+                }
+            }
+        }
         Blockchain.mining(count+1, target.getHeader().getCurrentHash());
         Blockchain.persist();
         Blockchain.distribute();
@@ -53,7 +73,12 @@ public class BlockchainServiceImpl implements BlockchainService{
     }
 
     @Override
-    public boolean addNewDrug(Drug drug) {
+    public boolean addNewDrug(Drug drug, User manufacturer) {
+        String encryptUnitPrice = encryptUnitPrice(drug.getUnitPrice(), manufacturer);
+        if (Objects.isNull(encryptUnitPrice)){
+            return false;
+        }
+        drug.setUnitPrice(encryptUnitPrice);
         Block prevBlock = Objects.requireNonNull(Blockchain.get()).getLast();
         Block newBlock = new Block( prevBlock.getHeader().getCurrentHash(), drug);
         newBlock.getHeader().setIndex(prevBlock.getHeader().getIndex()+1);
@@ -70,16 +95,38 @@ public class BlockchainServiceImpl implements BlockchainService{
     }
 
     @Override
-    public List<TransactionRecord> getTransactionRecordData(String drugId) {
+    public Block findBlock(String drugId) {
         Optional<Block> block = Blockchain.findBlock(drugId);
         if(block.isEmpty()){
             return null;
         }
-
-        return block.get().getTranx().getTranxLst().stream()
-                .sorted(Comparator.comparing(TransactionRecord::getDateTime))
-                .collect(Collectors.toList());
+        return block.get();
     }
+
+    @Override
+    public String decryptUnitPrice(String cipherText) {
+        try{
+            String fileName = UserBank.getCurrentUser().getEncryptFullName().replaceAll("/", "");
+            PrivateKey privateKey = KeyAccess.getPrivateKey(fileName);
+            ASymmCrypto aSymmCrypto = new ASymmCrypto();
+            return aSymmCrypto.decrypt(cipherText, privateKey);
+        }catch (Exception e){
+            return cipherText;
+        }
+    }
+
+    private String encryptUnitPrice(String unitPrice, User manufacturer){
+        String fileName = manufacturer.getEncryptFullName().replaceAll("/","");
+        try {
+            PublicKey publicKey =  KeyAccess.getPublicKey(fileName);
+            ASymmCrypto aSymmCrypto = new ASymmCrypto();
+            return aSymmCrypto.encrypt(unitPrice, publicKey);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+
 
     @Override
     public boolean verifyDigitalSignature(TransactionRecord record) {

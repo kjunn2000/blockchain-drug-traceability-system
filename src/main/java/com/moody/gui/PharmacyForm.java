@@ -16,16 +16,17 @@ public class PharmacyForm extends JFrame{
     private JButton confirmReceiveBtn;
     private JLabel msgLabel;
     private JButton logOutButton;
+    private JButton trackingDashboardButton;
     private BlockchainService blockchainService;
     private AuthenticationService authenticationService;
 
-    public PharmacyForm(String title) {
+    public PharmacyForm(String title, BlockchainService blockchainService, AuthenticationService authenticationService) {
         super(title);
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         this.setContentPane(mainPanel);
         this.pack();
-        this.blockchainService = new BlockchainServiceImpl();
-        this.authenticationService = new AuthenticationServiceImpl();
+        this.blockchainService = blockchainService;
+        this.authenticationService = authenticationService;
 
         confirmReceiveBtn.addActionListener(new ActionListener() {
             @Override
@@ -43,6 +44,12 @@ public class PharmacyForm extends JFrame{
             public void actionPerformed(ActionEvent actionEvent) {
                 authenticationService.logOut(FormManager.phamarcyForm);
                 clearForm();
+            }
+        });
+        trackingDashboardButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent actionEvent) {
+                FormManager.switchToTrackingDashboard(FormManager.manufacturerForm);
             }
         });
     }

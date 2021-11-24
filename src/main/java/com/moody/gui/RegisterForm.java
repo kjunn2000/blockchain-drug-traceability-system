@@ -27,12 +27,12 @@ public class RegisterForm extends JFrame {
     private JLabel errMsg;
     private AuthenticationService authenticationService;
 
-    public RegisterForm(String title){
+    public RegisterForm(String title, AuthenticationService authenticationService){
         super(title);
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         this.setContentPane(mainPanel);
         this.pack();
-        this.authenticationService = new AuthenticationServiceImpl();
+        this.authenticationService = authenticationService;
         registerBtn.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent actionEvent) {
