@@ -9,6 +9,7 @@ import com.moody.service.FormManager;
 import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.Objects;
 import java.util.Vector;
 
 public class RegisterForm extends JFrame {
@@ -36,6 +37,14 @@ public class RegisterForm extends JFrame {
         registerBtn.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent actionEvent) {
+                if (fullNameField.getText().isEmpty() ||
+                        passwordField.getText().isEmpty() ||
+                        companyNameField.getText().isEmpty() ||
+                    companyLocationArea.getText().isEmpty() ||
+                Objects.isNull(businessTypeBox.getSelectedItem())){
+                        errMsg.setText("Please enter all the fields.");
+                        return;
+                }
                 if (!authenticationService.register(new User(fullNameField.getText(),
                         passwordField.getText(),
                         companyNameField.getText(),

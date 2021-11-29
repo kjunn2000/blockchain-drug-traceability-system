@@ -11,6 +11,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.text.Normalizer;
 import java.util.List;
+import java.util.Objects;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
@@ -90,7 +91,12 @@ public class SupplierForm extends JFrame{
     }
 
     public void fetchManufacturerList(){
-        this.manufacturerList = UserBank.getAllManufacturer();
+        List<User> allManufacturer = UserBank.getAllManufacturer();
+        if (Objects.isNull(allManufacturer)){
+            return;
+        }else{
+            this.manufacturerList = allManufacturer;
+        }
         this.manufacturerBox.setModel(new DefaultComboBoxModel(manufacturerList.stream().map(User::getFullName).toArray()));
     }
 

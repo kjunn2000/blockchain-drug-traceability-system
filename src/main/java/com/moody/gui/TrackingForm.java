@@ -54,6 +54,12 @@ public class TrackingForm extends JFrame {
             @Override
             public void actionPerformed(ActionEvent actionEvent) {
                 Block block = blockchainService.findBlock(drugIdField.getText());
+
+                if (Objects.isNull(block)){
+                    errMsg.setText("Drug ID not found.");
+                    return;
+                }
+
                 List<TransactionRecord> transactionRecordData = sortTransactionData(block);
 
                 if (transactionRecordData == null){

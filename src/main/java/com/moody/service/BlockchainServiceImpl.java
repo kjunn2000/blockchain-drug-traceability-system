@@ -15,11 +15,8 @@ import javax.crypto.IllegalBlockSizeException;
 import java.security.InvalidKeyException;
 import java.security.PrivateKey;
 import java.security.PublicKey;
-import java.util.Comparator;
-import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
-import java.util.stream.Collectors;
 
 public class BlockchainServiceImpl implements BlockchainService{
 
@@ -73,8 +70,8 @@ public class BlockchainServiceImpl implements BlockchainService{
     }
 
     @Override
-    public boolean addNewDrug(Drug drug, User manufacturer) {
-        String encryptUnitPrice = encryptUnitPrice(drug.getUnitPrice(), manufacturer);
+    public boolean addNewDrug(Drug drug, User userToSign) {
+        String encryptUnitPrice = encryptUnitPrice(drug.getUnitPrice(), userToSign);
         if (Objects.isNull(encryptUnitPrice)){
             return false;
         }

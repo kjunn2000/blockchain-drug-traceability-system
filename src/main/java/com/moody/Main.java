@@ -7,6 +7,7 @@ import com.moody.service.FormManager;
 public class Main {
 
     public static void main(String[] args) throws Exception {
+//        Uncomment if userbank.txt has data
         UserBank.loadUserData();
 
 //        The configure() should be done once at the start of the blockchain

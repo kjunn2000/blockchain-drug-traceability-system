@@ -1,6 +1,6 @@
-tester1,1,MoodyJun,Bukit Jalil,SUPPLIER,RFBeGcKduN/+3MHUMu0rlw==
-tester2,2,MoodyJun,Bukit,MANUFACTURER,TXoFpmrORwAzY0rZOoTAsw==
-tester3,3,Moody,Bukit Bintang,DISTRIBUTOR,pxiW7L7nJlO0Kgbn4p7QqA==
-tester4,4,Moody,Bukit bintang,PHARMACY,TLlXYUQVjBvf22yE6QScXA==
-testerM,M,Moody,Bukit Jalil,MANUFACTURER,4Kf6wylLCyGWLTlf9VlA4g==
-testerQ,Q,MMM,Johor,MANUFACTURER,TeqUEeEEIf4KT7MSlEWHmQ==
+supplier_kl,1,Moody Co,Bukit Bintang,SUPPLIER,A1Ra9v0HWaYJ7oJTHJdxHw==
+manufacturer_kl,2,Sunday Co,Bukit Jalil,MANUFACTURER,lfEX+W+WwsArnfi3G5kdhw==
+distributor_kl,3,Fast Trasnport Co,Bukit Jalil,DISTRIBUTOR,hqOQ3vyXGNnuyyaQx/uyfg==
+pharmacy_jb,4,Health Care Co,Johor Bahru,PHARMACY,vVocSFBYMuYlInIHVFln9w==
+manufacturer_jb,5,One Day Delivery Co,Skudai,MANUFACTURER,VXBaKvl8U/64fYoy2P+obQ==
+manufacturer_sg,6,Tan & Tom Co,Sentosa,MANUFACTURER,GMEJR4zasTiyOqVDNjX3xQ==

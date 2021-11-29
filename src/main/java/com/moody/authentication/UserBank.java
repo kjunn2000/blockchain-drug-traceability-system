@@ -5,11 +5,13 @@ import com.moody.blockchain.BusinessType;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 import java.util.stream.Collectors;
 
 public class UserBank {
-    private static List<User> userList;
+    private static List<User> userList = new ArrayList<>();
     private static User currentUser;
 
     public static List<User> getUserList() {
@@ -63,6 +65,9 @@ public class UserBank {
     }
 
     public static List<User> getAllManufacturer() {
+        if (Objects.isNull(userList)){
+            return null;
+        }
         return userList.stream().filter(user -> user.getBusinessType().equals(BusinessType.MANUFACTURER)).collect(Collectors.toList());
     }
 }
